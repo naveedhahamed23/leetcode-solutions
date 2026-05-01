@@ -1,0 +1,24 @@
+// Problem: Maximum Subarray
+// Link: https://leetcode.com/problems/maximum-subarray/
+// Difficulty: Medium
+
+// Approach:
+// Use Kadane's Algorithm.
+// At each step, decide whether to start a new subarray or extend the current one.
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int current_sum = nums[0];
+        int largest_sum = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            current_sum = Math.max(nums[i], current_sum + nums[i]);
+            largest_sum = Math.max(largest_sum, current_sum);
+        }
+
+        return largest_sum;
+    }
+}
