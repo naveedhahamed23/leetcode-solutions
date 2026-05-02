@@ -1,0 +1,29 @@
+// Problem: Matrix Diagonal Sum
+// Link: https://leetcode.com/problems/matrix-diagonal-sum/
+// Difficulty: Easy
+
+// Approach:
+// Add primary diagonal (i, i)
+// Add secondary diagonal (i, n-1-i)
+// Avoid double counting the center element
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+class Solution {
+    public int diagonalSum(int[][] mat) {
+        int n = mat.length;
+        int sum = 0;
+
+        for (int i = 0; i < n; i++) {
+            sum += mat[i][i];
+
+            // avoid double count of center element
+            if (i != n - 1 - i) {
+                sum += mat[i][n - 1 - i];
+            }
+        }
+
+        return sum;
+    }
+}
