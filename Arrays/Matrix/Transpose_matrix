@@ -1,0 +1,28 @@
+// Problem: Transpose Matrix
+// Link: https://leetcode.com/problems/transpose-matrix/
+// Difficulty: Easy
+
+// Approach:
+// Swap rows with columns.
+// Create a new matrix of size (cols x rows)
+// and assign result[j][i] = matrix[i][j].
+
+// Time Complexity: O(m * n)
+// Space Complexity: O(m * n)
+
+class Solution {
+    public int[][] transpose(int[][] matrix) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+
+        int[][] result = new int[col][row];
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                result[j][i] = matrix[i][j];
+            }
+        }
+
+        return result;
+    }
+}
