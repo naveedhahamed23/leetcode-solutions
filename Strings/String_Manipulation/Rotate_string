@@ -1,0 +1,22 @@
+// Problem: Rotate String
+// Link: https://leetcode.com/problems/rotate-string/
+// Difficulty: Easy
+
+// Approach:
+// If two strings are rotations of each other,
+// then goal must be a substring of (s + s).
+// First check lengths. If equal, check substring.
+
+// Time Complexity: O(n)
+// Space Complexity: O(n)
+
+class Solution {
+    public boolean rotateString(String s, String goal) {
+        if (s.length() != goal.length()) {
+            return false;
+        }
+
+        String doubled = s + s;
+        return doubled.contains(goal);
+    }
+}
