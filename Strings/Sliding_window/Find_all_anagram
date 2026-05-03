@@ -1,0 +1,46 @@
+// Problem: Find All Anagrams in a String
+// Link: https://leetcode.com/problems/find-all-anagrams-in-a-string/
+// Difficulty: Medium
+
+// Approach:
+// Use sliding window + frequency arrays.
+// Build frequency of p and initial window in s.
+// Slide window by adding right char and removing left char.
+// Compare arrays at each step.
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> result = new ArrayList<>();
+
+        if (s.length() < p.length()) return result;
+
+        int[] pcount = new int[26];
+        int[] scount = new int[26];
+
+        // build initial counts
+        for (int i = 0; i < p.length(); i++) {
+            pcount[p.charAt(i) - 'a']++;
+            scount[s.charAt(i) - 'a']++;
+        }
+
+        // check first window
+        if (Arrays.equals(pcount, scount)) {
+            result.add(0);
+        }
+
+        // slide window
+        for (int i = p.length(); i < s.length(); i++) {
+            scount[s.charAt(i) - 'a']++;                     // add new
+            scount[s.charAt(i - p.length()) - 'a']--;         // remove old
+
+            if (Arrays.equals(pcount, scount)) {
+                result.add(i - p.length() + 1);
+            }
+        }
+
+        return result;
+    }
+}
