@@ -1,0 +1,48 @@
+// Problem: Permutation in String
+// Link: https://leetcode.com/problems/permutation-in-string/
+// Difficulty: Medium
+
+// Approach:
+// Use sliding window + frequency array.
+// Count characters of s1.
+// Expand window in s2 and decrease count.
+// If any character count becomes negative, shrink window from left.
+// When window size equals s1 length → permutation found.
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        int[] count = new int[26];
+
+        if (s1.length() > s2.length()) {
+            return false;
+        }
+
+        // Build frequency for s1
+        for (char c : s1.toCharArray()) {
+            count[c - 'a']++;
+        }
+
+        int left = 0;
+
+        for (int right = 0; right < s2.length(); right++) {
+            // Include current character
+            count[s2.charAt(right) - 'a']--;
+
+            // If invalid, shrink window
+            while (count[s2.charAt(right) - 'a'] < 0) {
+                count[s2.charAt(left) - 'a']++;
+                left++;
+            }
+
+            // Check window size
+            if (right - left + 1 == s1.length()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
