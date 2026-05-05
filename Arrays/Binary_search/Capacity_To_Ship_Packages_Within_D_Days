@@ -1,0 +1,65 @@
+// Problem: Capacity To Ship Packages Within D Days
+// Link: https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/
+// Difficulty: Medium
+
+// Approach:
+// Use Binary Search on Answer.
+//
+// Goal:
+// Find the minimum ship capacity such that all packages can be shipped
+// within the given number of days.
+//
+// Search Space:
+// capacity ∈ [max(weights), sum(weights)]
+//
+// For a given capacity (mid):
+// - Simulate loading packages in order
+// - Count how many days are required
+//
+// If requiredDays > days:
+//     capacity too small → increase it
+// Else:
+//     capacity works → try smaller capacity
+//
+// Time Complexity: O(n log(sum(weights)))
+// Space Complexity: O(1)
+
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        int left = 0;
+        int right = 0;
+
+        // Define search bounds
+        for (int w : weights) {
+            left = Math.max(left, w);
+            right += w;
+        }
+
+        // Binary search on capacity
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+
+            int currentLoad = 0;
+            int requiredDays = 1;
+
+            // Simulate shipping process
+            for (int w : weights) {
+                if (currentLoad + w <= mid) {
+                    currentLoad += w;
+                } else {
+                    requiredDays++;
+                    currentLoad = w;
+                }
+            }
+
+            // Adjust search space
+            if (requiredDays > days) {
+                left = mid + 1;  // capacity too small
+            } else {
+                right = mid;     // valid capacity, try smaller
+            }
+        }
+
+        return left;
+    }
+}
