@@ -1,0 +1,61 @@
+/**
+ * LeetCode 234 - Palindrome Linked List
+ *
+ * Approach:
+ * 1. Find middle of linked list
+ * 2. Reverse second half
+ * 3. Compare both halves
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
+
+class Solution {
+
+    public boolean isPalindrome(ListNode head) {
+
+        // Edge case
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        // Find middle
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Reverse second half
+        ListNode prev = null;
+        ListNode curr = slow;
+
+        while (curr != null) {
+
+            ListNode nextNode = curr.next;
+
+            curr.next = prev;
+
+            prev = curr;
+            curr = nextNode;
+        }
+
+        // Compare first half and second half
+        ListNode first = head;
+        ListNode second = prev;
+
+        while (second != null) {
+
+            if (first.val != second.val) {
+                return false;
+            }
+
+            first = first.next;
+            second = second.next;
+        }
+
+        return true;
+    }
+}
