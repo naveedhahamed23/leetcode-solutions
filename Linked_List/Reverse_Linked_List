@@ -1,0 +1,37 @@
+/**
+ * LeetCode 206 - Reverse Linked List
+ *
+ * Approach:
+ * Use three pointers:
+ * 1. prev     -> stores previous node
+ * 2. curr     -> current node being processed
+ * 3. nextNode -> stores next node temporarily
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
+
+class Solution {
+
+    public ListNode reverseList(ListNode head) {
+
+        ListNode prev = null;
+        ListNode curr = head;
+
+        while (curr != null) {
+
+            // Store next node before breaking the link
+            ListNode nextNode = curr.next;
+
+            // Reverse current node's pointer
+            curr.next = prev;
+
+            // Move pointers forward
+            prev = curr;
+            curr = nextNode;
+        }
+
+        // prev becomes the new head
+        return prev;
+    }
+}
