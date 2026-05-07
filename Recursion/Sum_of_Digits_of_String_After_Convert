@@ -1,0 +1,60 @@
+/**
+ * LeetCode 1945 - Sum of Digits of String After Convert
+ *
+ * Approach:
+ * 1. Convert each character into its alphabetical position
+ * 2. Directly add the digits of each value
+ * 3. Repeat digit summation k - 1 times
+ * 4. Use recursion to calculate digit sum
+ *
+ * Time Complexity: O(n + k)
+ * Space Complexity: O(log n)
+ */
+
+class Solution {
+
+    public int getLucky(String s, int k) {
+
+        int sum = 0;
+
+        // First transformation
+        for (int i = 0; i < s.length(); i++) {
+
+            int value = s.charAt(i) - 'a' + 1;
+
+            // Two digit number
+            if (value >= 10) {
+
+                sum += value / 10;
+                sum += value % 10;
+            }
+
+            // Single digit number
+            else {
+                sum += value;
+            }
+        }
+
+        // Remaining transformations
+        while (k > 1) {
+
+            sum = sumofdigits(sum);
+
+            k--;
+        }
+
+        return sum;
+    }
+
+    // Recursive digit sum
+    public int sumofdigits(int n) {
+
+        // Base case
+        if (n == 0) {
+            return 0;
+        }
+
+        // Recursive case
+        return (n % 10) + sumofdigits(n / 10);
+    }
+}
