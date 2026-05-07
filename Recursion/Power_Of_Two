@@ -1,0 +1,36 @@
+/**
+ * LeetCode 231 - Power of Two
+ *
+ * Approach:
+ * 1. If n is less than or equal to 0, return false
+ * 2. If n becomes 1, it is a power of two
+ * 3. If n is not divisible by 2, return false
+ * 4. Recursively divide n by 2
+ *
+ * Time Complexity: O(log n)
+ * Space Complexity: O(log n)
+ */
+
+class Solution {
+
+    public boolean isPowerOfTwo(int n) {
+
+        // Invalid case
+        if (n <= 0) {
+            return false;
+        }
+
+        // Base case
+        if (n == 1) {
+            return true;
+        }
+
+        // Not divisible by 2
+        if (n % 2 != 0) {
+            return false;
+        }
+
+        // Recursive call
+        return isPowerOfTwo(n / 2);
+    }
+}
