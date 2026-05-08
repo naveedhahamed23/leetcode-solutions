@@ -1,0 +1,40 @@
+/**
+ * LeetCode 151 - Reverse Words in a String
+ *
+ * Approach:
+ * 1. Remove leading and trailing spaces using trim()
+ * 2. Split the string using one or more spaces as delimiter
+ * 3. Traverse the array from end to beginning
+ * 4. Build the reversed sentence using StringBuilder
+ *
+ * Example:
+ * Input  : "  hello   world  "
+ * Output : "world hello"
+ *
+ * Time Complexity  : O(n)
+ * Space Complexity : O(n)
+ */
+
+class Solution {
+
+    public String reverseWords(String s) {
+
+        // Remove extra spaces and split words
+        String[] words = s.trim().split("\\s+");
+
+        StringBuilder result = new StringBuilder();
+
+        // Traverse words in reverse order
+        for (int i = words.length - 1; i >= 0; i--) {
+
+            result.append(words[i]);
+
+            // Avoid trailing space
+            if (i != 0) {
+                result.append(" ");
+            }
+        }
+
+        return result.toString();
+    }
+}
