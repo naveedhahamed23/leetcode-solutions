@@ -1,0 +1,51 @@
+/**
+ * LeetCode 69 - Sqrt(x)
+ *
+ * Approach:
+ * 1. Use binary search between 1 and x
+ * 2. Find the largest number whose square is <= x
+ * 3. If mid * mid equals x, return mid
+ * 4. Otherwise continue searching in left or right half
+ *
+ * Time Complexity: O(log x)
+ * Space Complexity: O(1)
+ */
+
+class Solution {
+
+    public int mySqrt(int x) {
+
+        // Square root of 0 and 1 is itself
+        if (x < 2) {
+            return x;
+        }
+
+        int left = 1;
+        int right = x;
+
+        while (left <= right) {
+
+            int mid = left + (right - left) / 2;
+
+            long square = (long) mid * mid;
+
+            // Perfect square found
+            if (square == x) {
+                return mid;
+            }
+
+            // Mid square is smaller
+            else if (square < x) {
+                left = mid + 1;
+            }
+
+            // Mid square is larger
+            else {
+                right = mid - 1;
+            }
+        }
+
+        // right will contain floor(sqrt(x))
+        return right;
+    }
+}
