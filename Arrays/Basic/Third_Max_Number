@@ -1,0 +1,64 @@
+/**
+ * LeetCode 414 - Third Maximum Number
+ *
+ * Problem:
+ * Given an integer array nums,
+ * return the third distinct maximum number in the array.
+ * If the third distinct maximum does not exist,
+ * return the maximum number.
+ *
+ * Approach:
+ * 1. Maintain three distinct maximum values:
+ *    max, secondMax, and thirdMax
+ * 2. Skip duplicate values
+ * 3. Update the three maximums accordingly
+ * 4. If third maximum does not exist,
+ *    return the largest value
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
+
+class Solution {
+
+    public int thirdMax(int[] nums) {
+
+        long max = Long.MIN_VALUE;
+        long secondMax = Long.MIN_VALUE;
+        long thirdMax = Long.MIN_VALUE;
+
+        for (int n : nums) {
+
+            // Skip duplicates
+            if (n == max || n == secondMax || n == thirdMax) {
+                continue;
+            }
+
+            // Update maximum values
+            if (n > max) {
+
+                thirdMax = secondMax;
+                secondMax = max;
+                max = n;
+            }
+
+            else if (n > secondMax) {
+
+                thirdMax = secondMax;
+                secondMax = n;
+            }
+
+            else if (n > thirdMax) {
+
+                thirdMax = n;
+            }
+        }
+
+        // Third maximum does not exist
+        if (thirdMax == Long.MIN_VALUE) {
+            return (int) max;
+        }
+
+        return (int) thirdMax;
+    }
+}
