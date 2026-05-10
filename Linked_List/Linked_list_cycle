@@ -1,0 +1,46 @@
+/**
+ * LeetCode 141 - Linked List Cycle
+ *
+ * Problem:
+ * Given the head of a linked list,
+ * determine whether the linked list has a cycle.
+ *
+ * A cycle exists if a node can be reached again
+ * by continuously following the next pointer.
+ *
+ * Approach:
+ * 1. Use two pointers:
+ *    - slow moves one step at a time
+ *    - fast moves two steps at a time
+ * 2. If there is a cycle,
+ *    fast and slow pointers will eventually meet
+ * 3. If fast reaches null,
+ *    the linked list does not contain a cycle
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
+
+public class Solution {
+
+    public boolean hasCycle(ListNode head) {
+
+        ListNode slow = head;
+        ListNode fast = head;
+
+        // Traverse linked list
+        while (fast != null && fast.next != null) {
+
+            slow = slow.next;
+            fast = fast.next.next;
+
+            // Cycle detected
+            if (slow == fast) {
+                return true;
+            }
+        }
+
+        // No cycle found
+        return false;
+    }
+}
