@@ -1,0 +1,48 @@
+import java.util.HashSet;
+
+/**
+ * LeetCode 219 - Contains Duplicate II
+ *
+ * Problem:
+ * Given an integer array nums and an integer k,
+ * return true if there are two distinct indices i and j such that:
+ *
+ * nums[i] == nums[j]
+ * and
+ * |i - j| <= k
+ *
+ * Approach:
+ * 1. Use a sliding window of size k
+ * 2. Store elements inside a HashSet
+ * 3. If current element already exists in set,
+ *    duplicate within range is found
+ * 4. Remove elements that move out of the window
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(k)
+ */
+
+class Solution {
+
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < nums.length; i++) {
+
+            // Duplicate found within range k
+            if (set.contains(nums[i])) {
+                return true;
+            }
+
+            set.add(nums[i]);
+
+            // Maintain sliding window size
+            if (set.size() > k) {
+                set.remove(nums[i - k]);
+            }
+        }
+
+        return false;
+    }
+}
