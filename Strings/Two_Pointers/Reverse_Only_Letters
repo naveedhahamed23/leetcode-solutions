@@ -1,0 +1,57 @@
+/**
+ * LeetCode 917 - Reverse Only Letters
+ *
+ * Problem:
+ * Given a string s,
+ * reverse only all the letters in the string
+ * and keep non-letter characters in their original positions.
+ *
+ * Approach:
+ * 1. Convert string into character array
+ * 2. Use two pointers:
+ *    - left starts from beginning
+ *    - right starts from end
+ * 3. Skip non-letter characters
+ * 4. Swap only alphabetic characters
+ * 5. Return the modified string
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(n)
+ */
+
+class Solution {
+
+    public String reverseOnlyLetters(String s) {
+
+        char[] str = s.toCharArray();
+
+        int left = 0;
+        int right = s.length() - 1;
+
+        while (left < right) {
+
+            // Skip non-letter from left
+            if (!Character.isLetter(str[left])) {
+                left++;
+            }
+
+            // Skip non-letter from right
+            else if (!Character.isLetter(str[right])) {
+                right--;
+            }
+
+            // Swap letters
+            else {
+
+                char temp = str[left];
+                str[left] = str[right];
+                str[right] = temp;
+
+                left++;
+                right--;
+            }
+        }
+
+        return new String(str);
+    }
+}
