@@ -1,0 +1,60 @@
+/**
+ * LeetCode 345 - Reverse Vowels of a String
+ *
+ * Problem:
+ * Given a string s,
+ * reverse only all the vowels in the string
+ * and return the modified string.
+ *
+ * Approach:
+ * 1. Convert string into character array
+ * 2. Use two pointers:
+ *    - left starts from beginning
+ *    - right starts from end
+ * 3. Move pointers until vowels are found
+ * 4. Swap the vowels
+ * 5. Continue until pointers cross
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(n)
+ */
+
+class Solution {
+
+    public String reverseVowels(String s) {
+
+        char[] str = s.toCharArray();
+
+        int left = 0;
+        int right = s.length() - 1;
+
+        String vowels = "aeiouAEIOU";
+
+        while (left < right) {
+
+            // Find vowel from left
+            while (left < right &&
+                   vowels.indexOf(str[left]) == -1) {
+
+                left++;
+            }
+
+            // Find vowel from right
+            while (left < right &&
+                   vowels.indexOf(str[right]) == -1) {
+
+                right--;
+            }
+
+            // Swap vowels
+            char temp = str[left];
+            str[left] = str[right];
+            str[right] = temp;
+
+            left++;
+            right--;
+        }
+
+        return new String(str);
+    }
+}
