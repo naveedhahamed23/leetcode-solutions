@@ -1,0 +1,44 @@
+/**
+ * LeetCode 1512 - Number of Good Pairs
+ *
+ * Problem:
+ * Given an array of integers nums,
+ * return the number of good pairs.
+ *
+ * A pair (i, j) is called good if:
+ * - nums[i] == nums[j]
+ * - i < j
+ *
+ * Approach:
+ * 1. Traverse each element in the array
+ * 2. Compare it with all elements ahead of it
+ * 3. If both elements are equal,
+ *    increment the count
+ * 4. Return total number of good pairs
+ *
+ * Time Complexity: O(n²)
+ * Space Complexity: O(1)
+ */
+
+class Solution {
+
+    public int numIdenticalPairs(int[] nums) {
+
+        int count = 0;
+
+        // Traverse array
+        for (int i = 0; i < nums.length; i++) {
+
+            // Compare with remaining elements
+            for (int j = i + 1; j < nums.length; j++) {
+
+                // Good pair found
+                if (nums[i] == nums[j]) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+}
