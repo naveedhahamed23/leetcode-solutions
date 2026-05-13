@@ -1,0 +1,54 @@
+/**
+ * LeetCode 70 - Climbing Stairs
+ *
+ * Problem:
+ * You are climbing a staircase.
+ * It takes n steps to reach the top.
+ *
+ * Each time you can either climb:
+ * - 1 step
+ * - 2 steps
+ *
+ * Return the total number of distinct ways
+ * to reach the top.
+ *
+ * Approach:
+ * 1. To reach current stair,
+ *    you can come from:
+ *    - previous stair (n - 1)
+ *    - two stairs before (n - 2)
+ * 2. This forms a Fibonacci pattern:
+ *
+ *    ways(n) = ways(n - 1) + ways(n - 2)
+ *
+ * 3. Use two variables to store previous results
+ *    and build the answer iteratively
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
+
+class Solution {
+
+    public int climbStairs(int n) {
+
+        // Base cases
+        if (n <= 2) {
+            return n;
+        }
+
+        int first = 1;
+        int second = 2;
+
+        // Calculate ways iteratively
+        for (int i = 3; i <= n; i++) {
+
+            int current = first + second;
+
+            first = second;
+            second = current;
+        }
+
+        return second;
+    }
+}
