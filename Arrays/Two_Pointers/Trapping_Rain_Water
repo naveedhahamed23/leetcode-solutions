@@ -1,0 +1,81 @@
+/**
+ * LeetCode 42 - Trapping Rain Water
+ *
+ * Problem:
+ * Given n non-negative integers representing
+ * an elevation map where the width of each bar is 1,
+ * compute how much water can be trapped after raining.
+ *
+ * Approach:
+ * Two Pointer Technique
+ *
+ * 1. Maintain two pointers:
+ *    - left from beginning
+ *    - right from end
+ *
+ * 2. Track:
+ *    - leftMax  -> maximum height from left
+ *    - rightMax -> maximum height from right
+ *
+ * 3. Water trapped depends on the smaller boundary
+ *
+ * 4. Move the smaller height pointer inward
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
+
+class Solution {
+
+    public int trap(int[] height) {
+
+        int left = 0;
+        int right = height.length - 1;
+
+        int leftMax = 0;
+        int rightMax = 0;
+
+        int water = 0;
+
+        while (left < right) {
+
+            // Process left side
+            if (height[left] <= height[right]) {
+
+                // Update left maximum
+                if (height[left] >= leftMax) {
+
+                    leftMax = height[left];
+                }
+
+                // Water trapped
+                else {
+
+                    water += leftMax - height[left];
+                }
+
+                left++;
+            }
+
+            // Process right side
+            else {
+
+                // Update right maximum
+                if (height[right] >= rightMax) {
+
+                    rightMax = height[right];
+                }
+
+                // Water trapped
+                else {
+
+                    water += rightMax - height[right];
+                }
+
+                right--;
+            }
+        }
+
+        return water;
+    }
+}
