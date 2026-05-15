@@ -1,0 +1,82 @@
+/**
+ * LeetCode 75 - Sort Colors
+ *
+ * Problem:
+ * Given an array nums containing:
+ * - 0s
+ * - 1s
+ * - 2s
+ *
+ * Sort the array in-place such that:
+ * - 0s come first
+ * - 1s come second
+ * - 2s come last
+ *
+ * Approach:
+ * Dutch National Flag Algorithm
+ *
+ * 1. Maintain three pointers:
+ *    - low  -> position for 0
+ *    - mid  -> current element
+ *    - high -> position for 2
+ *
+ * 2. Traverse the array:
+ *    - If nums[mid] == 0:
+ *          swap with low
+ *          increment low and mid
+ *
+ *    - If nums[mid] == 1:
+ *          move mid forward
+ *
+ *    - If nums[mid] == 2:
+ *          swap with high
+ *          decrement high
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
+
+class Solution {
+
+    public void sortColors(int[] nums) {
+
+        int low = 0;
+        int mid = 0;
+        int high = nums.length - 1;
+
+        // Traverse array
+        while (mid <= high) {
+
+            // Place 0 at beginning
+            if (nums[mid] == 0) {
+
+                swap(nums, low, mid);
+
+                low++;
+                mid++;
+            }
+
+            // 1 is already in correct region
+            else if (nums[mid] == 1) {
+
+                mid++;
+            }
+
+            // Place 2 at end
+            else {
+
+                swap(nums, mid, high);
+
+                high--;
+            }
+        }
+    }
+
+    // Swap helper method
+    private void swap(int[] nums, int i, int j) {
+
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+}
