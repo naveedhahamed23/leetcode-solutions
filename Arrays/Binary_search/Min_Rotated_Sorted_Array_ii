@@ -1,0 +1,68 @@
+/**
+ * LeetCode 154 - Find Minimum in Rotated Sorted Array II
+ *
+ * Problem:
+ * Suppose an array of length n sorted in ascending order
+ * is rotated between 1 and n times.
+ *
+ * The array may contain duplicates.
+ *
+ * Return the minimum element in the array.
+ *
+ * Approach:
+ * Binary Search
+ *
+ * 1. Compare middle element with right element
+ * 2. If nums[mid] > nums[right]:
+ *      minimum lies in right half
+ *
+ * 3. If nums[mid] < nums[right]:
+ *      minimum lies in left half including mid
+ *
+ * 4. If nums[mid] == nums[right]:
+ *      reduce search space by decrementing right
+ *
+ * 5. Continue until left == right
+ *
+ * Time Complexity:
+ * - Average: O(log n)
+ * - Worst Case: O(n) due to duplicates
+ *
+ * Space Complexity: O(1)
+ */
+
+class Solution {
+
+    public int findMin(int[] nums) {
+
+        int left = 0;
+        int right = nums.length - 1;
+
+        // Binary search
+        while (left < right) {
+
+            int mid =
+                    left + (right - left) / 2;
+
+            // Minimum in right half
+            if (nums[mid] > nums[right]) {
+
+                left = mid + 1;
+            }
+
+            // Minimum in left half including mid
+            else if (nums[mid] < nums[right]) {
+
+                right = mid;
+            }
+
+            // Duplicate values
+            else {
+
+                right--;
+            }
+        }
+
+        return nums[left];
+    }
+}
