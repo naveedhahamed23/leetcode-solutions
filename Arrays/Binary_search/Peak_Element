@@ -1,0 +1,60 @@
+/**
+ * LeetCode 162 - Find Peak Element
+ *
+ * Problem:
+ * A peak element is an element that is strictly greater
+ * than its neighbors.
+ *
+ * Given an integer array nums,
+ * return the index of any peak element.
+ *
+ * You may imagine that nums[-1] and nums[n]
+ * are equal to negative infinity.
+ *
+ * Approach:
+ * Binary Search
+ *
+ * 1. Find middle element
+ * 2. Compare nums[mid] with nums[mid + 1]
+ *
+ * 3. If nums[mid] < nums[mid + 1]:
+ *      peak exists in right half
+ *
+ * 4. Otherwise:
+ *      peak exists in left half including mid
+ *
+ * 5. Continue until start == end
+ *
+ * Time Complexity: O(log n)
+ * Space Complexity: O(1)
+ */
+
+class Solution {
+
+    public int findPeakElement(int[] nums) {
+
+        int start = 0;
+        int end = nums.length - 1;
+
+        // Binary search
+        while (start < end) {
+
+            int mid =
+                    start + (end - start) / 2;
+
+            // Peak lies in right half
+            if (nums[mid] < nums[mid + 1]) {
+
+                start = mid + 1;
+            }
+
+            // Peak lies in left half including mid
+            else {
+
+                end = mid;
+            }
+        }
+
+        return start;
+    }
+}
