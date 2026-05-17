@@ -1,0 +1,68 @@
+/**
+ * LeetCode 11 - Container With Most Water
+ *
+ * Problem:
+ * Given an integer array height where each element
+ * represents the height of a vertical line,
+ * find two lines that together with the x-axis
+ * form a container containing the maximum water.
+ *
+ * Approach:
+ * Two Pointer Technique
+ *
+ * 1. Place one pointer at the beginning
+ *    and another at the end
+ *
+ * 2. Calculate area using:
+ *      width × minimum height
+ *
+ * 3. Update maximum area if needed
+ *
+ * 4. Move the pointer with smaller height inward
+ *    because area is limited by the shorter line
+ *
+ * 5. Continue until pointers meet
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
+
+class Solution {
+
+    public int maxArea(int[] height) {
+
+        int left = 0;
+        int right = height.length - 1;
+
+        int maxArea = 0;
+
+        while (left < right) {
+
+            // Height of current container
+            int currentHeight =
+                    Math.min(height[left], height[right]);
+
+            // Width between pointers
+            int width = right - left;
+
+            // Current area
+            int area = currentHeight * width;
+
+            // Update maximum area
+            maxArea = Math.max(maxArea, area);
+
+            // Move smaller height pointer
+            if (height[left] < height[right]) {
+
+                left++;
+            }
+
+            else {
+
+                right--;
+            }
+        }
+
+        return maxArea;
+    }
+}
