@@ -1,0 +1,24 @@
+/**
+ * LeetCode 50 - Pow(x, n)
+ *
+ * Problem:
+ * Implement pow(x, n),
+ * which calculates x raised to the power n.
+ *
+ * Approach:
+ * Built-in Math Function
+ *
+ * 1. Use Java's built-in Math.pow() method
+ * 2. Return x raised to power n
+ *
+ * Time Complexity: O(log n)
+ * Space Complexity: O(1)
+ */
+
+class Solution {
+
+    public double myPow(double x, int n) {
+
+        return Math.pow(x, n);
+    }
+}
