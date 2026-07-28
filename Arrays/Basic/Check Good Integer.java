@@ -1,5 +1,5 @@
 /**
- * Check Good Integer
+ * Leetcode Number: 3959 - Check Good Integer
  *
  * Problem:
  * Given an integer n,
