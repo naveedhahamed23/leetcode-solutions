@@ -87,6 +87,7 @@ Each solution contains:
 # Languages Used
 
 * Java
+* SQL
 
 ---
 
