@@ -8,7 +8,7 @@
  * 4. Recursively divide n by 4
  *
  * Time Complexity: O(log n)
- * Space Complexity: O(log n)
+ * Space Complexity: O(log n))
  */
 
 class Solution {
